@@ -1,17 +1,24 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+#include <tuple>
+#include <string>
 
 std::vector<std::vector<std::string>> ip_pool;
 
 
 template <typename ... Args> 
-decltype(auto) filter(Args ... args)
+decltype(auto) filter( Args ... args)
 {
+    if (sizeof ... (Args)> 4)
+        throw "std::bad_alloc";
+
     std::vector<std::string> vect_ip_tasks;
     std::vector<std::vector<std::string>> filtered_pool;
-    int a[sizeof ... (Args)] = {static_cast<int>(args)...};
+    
+    int a[sizeof... (Args)] = {static_cast<int>(args)...};
+
+
     for (unsigned long i = 0 ; i < (sizeof... (Args)); ++i)
     {
         vect_ip_tasks.push_back(std::to_string(a[i]));
@@ -20,13 +27,10 @@ decltype(auto) filter(Args ... args)
     {
         auto s_vector = *it;
         auto counter = 0;
-        if (sizeof ... (Args) <=4)
+        for (unsigned long i = 0; i < (sizeof...(Args));  i++)
         {
-            for (unsigned long i = 0; i < (sizeof...(Args));  i++)
-            {
-                if (s_vector[i] == vect_ip_tasks[i])
-                    counter++;
-            }
+            if (s_vector[i] == vect_ip_tasks[i])
+                counter++;
         }
         if (counter == sizeof ...(Args)) filtered_pool.push_back(*it);
     }

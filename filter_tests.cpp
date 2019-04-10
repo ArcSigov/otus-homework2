@@ -52,4 +52,11 @@ BOOST_AUTO_TEST_CASE(filter_any_byte)
     BOOST_CHECK(ip_any == ip_pool);
 
 }
+
+BOOST_AUTO_TEST_CASE(throw_test)
+{
+
+    BOOST_CHECK_NO_THROW(filter(1,2,3,4));
+
+}
 BOOST_AUTO_TEST_SUITE_END()
