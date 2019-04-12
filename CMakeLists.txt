@@ -42,7 +42,7 @@ include(CPack)
 
 enable_testing()
 
-add_test(filter_bytes, 
-         filter_any_byte,  
-         throw_test,
-         erase_test       test_${PROJECT_NAME})
+add_test(filter_bytes     test_${PROJECT_NAME})
+add_test(filter_any_byte  test_${PROJECT_NAME})
+add_test(throw_test       test_${PROJECT_NAME})
+add_test(erase_test       test_${PROJECT_NAME})
