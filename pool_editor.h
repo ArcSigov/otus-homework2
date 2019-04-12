@@ -32,7 +32,7 @@ void eraser(std::vector<std::vector<std::string>> &vectr)
             {
                  auto str = *it1;
                  str.erase(0,str.find_first_not_of('0'));
-                 //!< отсечка удаления октанта "0"
+                 //do not remove not leading null
                  if (str.length() == 0)
                  {
                      str.push_back('0');
