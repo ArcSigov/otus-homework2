@@ -11,18 +11,11 @@ template <typename ... Args>
 decltype(auto) filter( Args ... args)
 {
     if (sizeof ... (Args)> 4)
-        throw "std::bad_alloc";
+        throw std::bad_alloc();
 
-    std::vector<std::string> vect_ip_tasks;
+    std::vector<std::string> vect_ip_tasks = {std::to_string(args)...};
     std::vector<std::vector<std::string>> filtered_pool;
-    
-    int a[sizeof... (Args)] = {static_cast<int>(args)...};
-
-
-    for (unsigned long i = 0 ; i < (sizeof... (Args)); ++i)
-    {
-        vect_ip_tasks.push_back(std::to_string(a[i]));
-    }
+ 
     for (auto it = ip_pool.cbegin(); it != ip_pool.cend();it++)
     {
         auto s_vector = *it;
