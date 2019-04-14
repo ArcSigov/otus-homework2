@@ -4,19 +4,25 @@
 #include <tuple>
 #include <string>
 
-std::vector<std::vector<std::string>> ip_pool;
+
+using ip_task = std::vector<int>;
+using ip_pool_data = std::vector<ip_task>;
+
+ip_task ip_oktets;
+ip_pool_data data_pool;
 
 
 template <typename ... Args> 
 decltype(auto) filter( Args ... args)
-{
+ {
     if (sizeof ... (Args)> 4)
         throw std::bad_alloc();
 
-    std::vector<std::string> vect_ip_tasks = {std::to_string(args)...};
-    std::vector<std::vector<std::string>> filtered_pool;
+    ip_task vect_ip_tasks = {(args)...};
+
+    ip_pool_data filtered_pool;
  
-    for (auto it = ip_pool.cbegin(); it != ip_pool.cend();it++)
+    for (auto it = data_pool.cbegin(); it != data_pool.cend();it++)
     {
         auto s_vector = *it;
         auto counter = 0;
@@ -32,10 +38,10 @@ decltype(auto) filter( Args ... args)
 
 auto filter_any(int value)
 {
-    std::vector<std::vector<std::string>> filtered_pool;
-    for (auto it = ip_pool.cbegin(); it !=ip_pool.cend();it++)
+    ip_pool_data filtered_pool;
+    for (auto it = data_pool.cbegin(); it !=data_pool.cend();it++)
     {
-        auto finded = std::find(it->begin(),it->end(),std::to_string(value));
+        auto finded = std::find(it->begin(),it->end(),value);
         if (finded != it->end())
         {
             filtered_pool.push_back(*it);
