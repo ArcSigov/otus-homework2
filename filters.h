@@ -5,11 +5,11 @@
 #include <string>
 
 
-using ip_task = std::vector<int>;
-using ip_pool_data = std::vector<ip_task>;
+using ip_data = std::vector<int>;
+using ip_pool_data = std::vector<ip_data>;
 
-ip_task ip_oktets;
-ip_pool_data data_pool;
+ip_data ip;
+ip_pool_data ip_data_pool;
 
 
 template <typename ... Args> 
@@ -18,11 +18,11 @@ decltype(auto) filter( Args ... args)
     if (sizeof ... (Args)> 4)
         throw std::bad_alloc();
 
-    ip_task vect_ip_tasks = {(args)...};
+    ip_data vect_ip_tasks = {(args)...};
 
     ip_pool_data filtered_pool;
  
-    for (auto it = data_pool.cbegin(); it != data_pool.cend();it++)
+    for (auto it = ip_data_pool.cbegin(); it != ip_data_pool.cend();it++)
     {
         auto s_vector = *it;
         auto counter = 0;
@@ -39,7 +39,7 @@ decltype(auto) filter( Args ... args)
 auto filter_any(int value)
 {
     ip_pool_data filtered_pool;
-    for (auto it = data_pool.cbegin(); it !=data_pool.cend();it++)
+    for (auto it = ip_data_pool.cbegin(); it !=ip_data_pool.cend();it++)
     {
         auto finded = std::find(it->begin(),it->end(),value);
         if (finded != it->end())

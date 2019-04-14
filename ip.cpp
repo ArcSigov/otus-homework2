@@ -74,16 +74,16 @@ int main()
             
             for (auto it1 = it->begin(); it1 != it->end();it1++)
             {
-                ip_oktets.push_back(std::stoi(*it1));
+                ip.push_back(std::stoi(*it1));
             }
-            data_pool.push_back(ip_oktets);
-            ip_oktets.clear();
+            ip_data_pool.push_back(ip);
+            ip.clear();
         }
         
         // TODO reverse lexicographically sort
-        std::sort(data_pool.begin(),data_pool.end(),std::greater<>());
+        std::sort(ip_data_pool.begin(),ip_data_pool.end(),std::greater<>());
         //print sorted ip vector
-        ip_log(data_pool);
+        ip_log(ip_data_pool);
         //print filtered ip vector with first byte 1
          auto ip = filter(1);
          ip_log(ip);

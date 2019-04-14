@@ -11,36 +11,36 @@ BOOST_AUTO_TEST_SUITE(ip_filtration_test_suite)
 
 BOOST_AUTO_TEST_CASE(filter_bytes) {
     
-    ip_task oktets = {1 , 0 , 234, 8};
-    data_pool.push_back(oktets);
+    ip_data ip_task = {1 , 0 , 234, 8};
+    ip_data_pool.push_back(ip_task);
     
 
     auto ip = filter(1,0,234,8);
-    BOOST_CHECK(ip == data_pool);
+    BOOST_CHECK(ip == ip_data_pool);
     ip = filter(1,0,234);
-    BOOST_CHECK(ip == data_pool);
+    BOOST_CHECK(ip == ip_data_pool);
     ip = filter(1,0);
-    BOOST_CHECK(ip == data_pool);
+    BOOST_CHECK(ip == ip_data_pool);
     ip = filter(1);
-    BOOST_CHECK(ip == data_pool);
+    BOOST_CHECK(ip == ip_data_pool);
 
-    data_pool.clear();
+    ip_data_pool.clear();
     
 }
 
 BOOST_AUTO_TEST_CASE(filter_any_byte)
 {
-    ip_task oktets   = {45 ,46,47,48};
-    data_pool.push_back(oktets);
+    ip_data ip   = {45 ,46,47,48};
+    ip_data_pool.push_back(ip);
 
     auto ip_any = filter_any(45);
-    BOOST_CHECK(ip_any == data_pool);
+    BOOST_CHECK(ip_any == ip_data_pool);
      ip_any = filter_any(46);
-    BOOST_CHECK(ip_any == data_pool);
+    BOOST_CHECK(ip_any == ip_data_pool);
     ip_any = filter_any(47);
-    BOOST_CHECK(ip_any == data_pool);
+    BOOST_CHECK(ip_any == ip_data_pool);
     ip_any = filter_any(48);
-    BOOST_CHECK(ip_any == data_pool);
+    BOOST_CHECK(ip_any == ip_data_pool);
 
 }
 
